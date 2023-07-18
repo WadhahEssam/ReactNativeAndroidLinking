@@ -6,18 +6,18 @@
  * @format
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import type { PropsWithChildren } from 'react';
 import {
   ActivityIndicator,
+  Button,
   Dimensions,
-  NativeModules,
-  requireNativeComponent,
   SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
   Text,
+  TextInput,
   useColorScheme,
   View,
 } from 'react-native';
@@ -28,9 +28,10 @@ import {
   Header,
   LearnMoreLinks,
 } from 'react-native/Libraries/NewAppScreen';
-import ImageNativeView from './nativeModules/ImageNativeView';
 import ProgressBar from './nativeModules/ProgressBar';
 import { ShadowedView } from 'react-native-fast-shadow';
+import ImageNativeView from './nativeModules/ImageNativeView';
+import CustomModule from './nativeModules/CustomModule';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -63,6 +64,7 @@ function Section({ children, title }: SectionProps): JSX.Element {
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
+  const [text, setText] = useState('test');
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
@@ -94,17 +96,34 @@ function App(): JSX.Element {
             />
 
             <ShadowedView style={{
-                height: 100,
-                width: 100,
-                backgroundColor: 'white',
-                shadowOffset: {
-                  height: -2,
-                  width: 0,
-               },
-                shadowRadius: 20,
-                shadowOpacity: 0.07,
-              }} 
+              height: 100,
+              width: 100,
+              marginStart: 100,
+              backgroundColor: 'white',
+              shadowOffset: {
+                height: -2,
+                width: 0,
+              },
+              shadowRadius: 20,
+              shadowOpacity: 0.07,
+              cornerRadii: {
+                topLeft: 100
+              }
+            }}
             />
+
+            <View style={{ width: 200 }}>
+              <TextInput value={text} onChangeText={(t) => {
+                setText(t);
+              }}
+                placeholder="write message"
+              />
+              <Button title='Call CustomModule (Open New Activity)' onPress={() => {
+                if (text) {
+                  CustomModule.launchAnotherActivity(text);
+                }
+              }} />
+            </View>
 
             <ActivityIndicator size={240} />
 

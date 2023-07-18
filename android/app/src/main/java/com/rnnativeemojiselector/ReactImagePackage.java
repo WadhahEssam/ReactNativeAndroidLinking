@@ -26,5 +26,4 @@ public class ReactImagePackage implements ReactPackage {
 
         return modules;
     }
-
 }
