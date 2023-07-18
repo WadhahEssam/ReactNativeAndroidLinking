@@ -30,5 +30,6 @@ public class CustomModule extends ReactContextBaseJavaModule {
         Intent intent = new Intent(this.context, AnotherActivity.class);
         intent.putExtra("text", text);
         getCurrentActivity().startActivity(intent);
+        getCurrentActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 }

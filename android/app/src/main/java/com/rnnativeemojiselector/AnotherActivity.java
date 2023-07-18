@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -36,6 +39,16 @@ public class AnotherActivity extends AppCompatActivity {
         System.out.println(message);
         viewText.setText(message);
         wrapperLayout.addView(viewText);
+
+
+        Button goToMainActivityButton = new Button(this);
+        goToMainActivityButton.setText("Go To Main Activity");
+        goToMainActivityButton.setOnClickListener(view -> {
+            Intent intentToGoToMainActivity = new Intent(this, MainActivity.class);
+            startActivity(intentToGoToMainActivity);
+            this.overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+        });
+        wrapperLayout.addView(goToMainActivityButton, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
         setContentView(main);
     }
