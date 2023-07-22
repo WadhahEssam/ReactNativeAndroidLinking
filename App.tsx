@@ -103,8 +103,9 @@ function App(): JSX.Element {
             }}>
               {/* Setting a height and width is so important */}
               <CustomView style={{
-                height: 200,
-                width: 300,
+                height: 500,
+                width: 350,
+                marginBottom: 40
               }}
               />
             </View>
