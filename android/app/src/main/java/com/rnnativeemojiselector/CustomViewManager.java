@@ -2,6 +2,7 @@ package com.rnnativeemojiselector;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.view.MotionEvent;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -51,6 +52,29 @@ public class CustomViewManager extends SimpleViewManager<LinearLayout> {
             Toast.makeText(themedReactContext, "Hello Thats a toast from native", Toast.LENGTH_SHORT).show();
         });
         newButton.setText("Submit");
+
+        // newButton.setOnTouchListener((view, motionEvent) -> {
+        //     if (motionEvent.getAction() == android.view.MotionEvent.ACTION_DOWN) {
+        //         view.setAlpha(0.5f);
+        //         view.setScaleX(0.8f);
+        //     } else if (motionEvent.getAction() == MotionEvent.ACTION_UP || motionEvent.getAction() == MotionEvent.ACTION_CANCEL) {
+        //         view.setAlpha(1f);
+        //         view.setScaleX(1f);
+        //     }
+        //     return false;
+        // });
+
+        // scale the button down when pressed with animation
+        newButton.setOnTouchListener((view, motionEvent) -> {
+            if (motionEvent.getAction() == android.view.MotionEvent.ACTION_DOWN) {
+                view.animate().scaleX(0.9f).scaleY(0.9f).setDuration(100).start();
+            } else if (motionEvent.getAction() == MotionEvent.ACTION_UP || motionEvent.getAction() == MotionEvent.ACTION_CANCEL) {
+                view.animate().scaleX(1f).scaleY(1f).setDuration(100).start();
+            }
+            return false;
+        });
+
+
 
         newView.addView(newButton);
 
