@@ -32,6 +32,7 @@ import ProgressBar from './nativeModules/ProgressBar';
 import { ShadowedView } from 'react-native-fast-shadow';
 import ImageNativeView from './nativeModules/ImageNativeView';
 import CustomModule from './nativeModules/CustomModule';
+import CustomView from './nativeModules/CustomView';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -94,6 +95,19 @@ function App(): JSX.Element {
                 width: Dimensions.get('window').width - 2 * 20,
               }}
             />
+
+            <View style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}>
+              {/* Setting a height and width is so important */}
+              <CustomView style={{
+                height: 200,
+                width: 300,
+              }}
+              />
+            </View>
 
             <ShadowedView style={{
               height: 100,

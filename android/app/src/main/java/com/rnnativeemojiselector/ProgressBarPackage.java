@@ -22,8 +22,11 @@ public class ProgressBarPackage implements ReactPackage {
 
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
-        return Collections.<ViewManager>singletonList(
-                new ProgressBarViewManager()
-        );
+
+        List<ViewManager> modules = new ArrayList<>();
+        modules.add(new CustomViewManager(reactContext));
+        modules.add(new ProgressBarViewManager());
+
+        return modules;
     }
 }
